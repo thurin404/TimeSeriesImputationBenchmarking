@@ -112,20 +112,20 @@ Raw Data → Preprocessing → Pattern Transfer → Imputation → Evaluation
 ### Installation & Setup
 ```bash
 # Clone repository
-git clone <repository-url>
-cd timeseriesimputation
+git clone https://github.com/thurin404/TimeSeriesImputationBenchmarking.git
+cd TimeSeriesImputationBenchmarking
 
-# Install dependencies with uv
+# Install dependencies (requires uv package manager)
 uv sync
 
-# Validate data quality
+# Validate data
 uv run python validate_data.py --pipeline
 
-# Run pipeline with test mode (quick validation)
-TEST_RUN=1 uvx dvc repro
+# Run pipeline in test mode (quick validation)
+TEST_RUN=1 dvc repro
 
 # Run full pipeline
-uvx dvc repro
+dvc repro
 ```
 
 ## Documentation
