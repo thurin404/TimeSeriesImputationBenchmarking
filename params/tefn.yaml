@@ -1,0 +1,21 @@
+model:
+  MIT_weight: 1.480319476897673
+  ORT_weight: 0.5565844623856243
+  apply_nonstationary_norm: true
+  batch_size: 64
+  epochs: 500
+  n_fod: 8
+  patience: 10
+model-trained:
+  feature: true
+  station: true
+  wide: true
+optimization:
+  n_trials: 50
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

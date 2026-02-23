@@ -1,0 +1,8 @@
+model-trained:
+  feature: false
+  station: false
+params:
+  random_state: 42
+  max_iter: 10
+  tol: 0.001
+  verbose: 1

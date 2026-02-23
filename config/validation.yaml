@@ -1,0 +1,12 @@
+max_features: 100
+max_file_size_mb: 500
+max_missing_percentage: 95.0
+min_features: 1
+min_valid_samples: 10
+outlier_std_threshold: 5.0
+required_numeric_ratio: 0.8
+timestamp_formats:
+- '%Y-%m-%d %H:%M:%S'
+- '%Y-%m-%d'
+- '%m/%d/%Y %H:%M:%S'
+- '%m/%d/%Y'

@@ -1,0 +1,19 @@
+model-trained:
+  feature: false
+  station: false
+optimized: true
+params:
+  metric: nan_euclidean
+  n_neighbors: 10
+  weights: uniform
+params_grid:
+  metric:
+  - nan_euclidean
+  n_neighbors:
+  - 3
+  - 5
+  - 7
+  - 10
+  weights:
+  - uniform
+  - distance

@@ -1,0 +1,29 @@
+model:
+  MIT_weight: 1.0
+  ORT_weight: 1.0
+  batch_size: 4
+  d_ffn: 256
+  d_llm: 768
+  d_model: 64
+  domain_prompt_content: The dataset consists of multivariate time series with missing
+    values that need to be imputed.
+  dropout: 0.2
+  epochs: 500
+  llm_model_type: GPT2
+  n_heads: 4
+  n_layers: 2
+  patch_size: 8
+  patch_stride: 4
+  patience: 3
+model-trained:
+  feature: false
+  statition: false
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: false

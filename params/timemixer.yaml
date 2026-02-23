@@ -1,0 +1,30 @@
+model:
+  apply_nonstationary_norm: false
+  batch_size: 32
+  channel_independence: false
+  channel_mixing: true
+  d_ffn: 512
+  d_model: 128
+  downsampling_layers: 2
+  downsampling_window: 2
+  dropout: 0.0
+  epochs: 500
+  n_heads: 8
+  n_kernels: 5
+  n_layers: 3
+  patience: 20
+  top_k: 6
+model-trained:
+  feature: true
+  station: true
+  statition: false
+  wide: true
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

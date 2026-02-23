@@ -1,0 +1,18 @@
+model:
+  batch_size: 32
+  epochs: 250
+  patience: 25
+  rnn_hidden_size: 384
+model-trained:
+  feature: true
+  station: true
+  wide: true
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

@@ -1,0 +1,29 @@
+model:
+  MIT_weight: 0.6043465540610552
+  ORT_weight: 0.9975655227408433
+  batch_size: 8
+  d_ffn: 128
+  d_input_embed: 128
+  d_learnable_embed: 256
+  d_proj: 128
+  dropout: 0.1
+  epochs: 500
+  input_dim: 1
+  n_layers: 3
+  n_temporal_heads: 2
+  output_dim: 1
+  patience: 20
+model-trained:
+  feature: true
+  station: true
+  statition: false
+  wide: true
+optimization:
+  n_trials: 50
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

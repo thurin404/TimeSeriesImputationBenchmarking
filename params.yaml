@@ -1,0 +1,39 @@
+preprocessing:
+  resample: false  # Options: true, false
+  resample_freq: 1d   # e.g., '1d', '1w', ect. Only used if resample is true. Base frequency is '1h'.
+prepare:
+  clip: default
+prepare_working_files:
+  partition_by: Wide # Options: 'Wide', 'Station', 'Feature'
+  scaling: true # Options: true, false
+imputation:
+  knn:
+    params_file: params/knn.yaml
+  xgboost:
+    params_file: params/xgboost.yaml
+  iterative:
+    params_file: params/iterative.yaml
+  saits:
+    params_file: params/saits.yaml
+  brits:
+    params_file: params/brits.yaml
+  timesnet:
+    params_file: params/timesnet.yaml
+  imputeformer:
+    params_file: params/imputeformer.yaml
+  gpvae:
+    params_file: params/gpvae.yaml
+  tefn:
+    params_file: params/tefn.yaml
+  timemixer:
+    params_file: params/timemixer.yaml
+  timellm:
+    params_file: params/timellm.yaml
+  moment:
+    params_file: params/moment.yaml
+  tslanet:
+    params_file: params/tslanet.yaml
+  frets:
+    params_file: params/frets.yaml
+  missnet:
+    params_file: params/missnet.yaml

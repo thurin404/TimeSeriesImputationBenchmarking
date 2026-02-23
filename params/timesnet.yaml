@@ -1,0 +1,24 @@
+model:
+  apply_nonstationary_norm: false
+  batch_size: 96
+  d_ffn: 256
+  d_model: 256
+  dropout: 0.3
+  epochs: 200
+  n_kernels: 7
+  n_layers: 3
+  patience: 30
+  top_k: 4
+model-trained:
+  feature: true
+  station: true
+  wide: true
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

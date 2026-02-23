@@ -1,0 +1,33 @@
+model:
+  add_positional_embedding: false
+  batch_size: 8
+  d_ffn: 1024
+  d_model: 512
+  dropout: 0.2
+  epochs: 500
+  finetuning_mode: linear-probing
+  head_dropout: 0.3
+  mask_ratio: 0.30000000000000004
+  n_layers: 8
+  orth_gain: 1.0
+  patch_size: 4
+  patch_stride: 4
+  patience: 20
+  revin_affine: true
+  transformer_backbone: google/flan-t5-small
+  transformer_type: encoder_only
+  value_embedding_bias: true
+model-trained:
+  feature: true
+  station: true
+  statition: false
+  wide: true
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

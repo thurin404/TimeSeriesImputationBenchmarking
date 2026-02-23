@@ -1,0 +1,66 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+env/
+
+# Models (generated during training)
+models/
+*.pypots
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.hdf5
+
+# Generated data directories (keep raw data, ignore processed)
+data/00_tools/
+data/02_preproc/
+data/03_prepared/
+data/04_working_files/
+data/05_imputed/
+data/05_imputed_data/
+data/06_evaluation/
+data/08_plots/
+
+# DVC (not using remote, but keep config)
+.dvc/cache/
+.dvc/tmp/
+dvc.lock
+
+# Experiment tracking and logs
+dvclive/
+dvclive-optuna/
+*.log
+*.tmp
+
+# Results and evaluation
+evaluation_results.csv
+evaluation_results_backup.csv
+
+# Jupyter notebook outputs
+*.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation (except README)
+docs/
+*.md
+!README.md

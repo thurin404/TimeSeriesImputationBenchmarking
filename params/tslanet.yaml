@@ -1,0 +1,23 @@
+model:
+  batch_size: 64
+  d_embedding: 512
+  dropout: 0.4209500970252581
+  epochs: 500
+  mask_ratio: 0.33761869705824643
+  n_layers: 1
+  patch_size: 64
+  patience: 30
+model-trained:
+  feature: true
+  station: true
+  statition: false
+  wide: true
+optimization:
+  n_trials: 50
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

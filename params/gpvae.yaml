@@ -1,0 +1,29 @@
+model:
+  K: 3
+  M: 5
+  batch_size: 16
+  beta: 0.6738017242196918
+  decoder_sizes: '128_128'
+  encoder_sizes: '128_128'
+  epochs: 500
+  kernel: matern
+  kernel_scales: 2
+  latent_size: 19
+  length_scale: 16
+  patience: 2
+  sigma: 0.971756547562981
+  window_size: 28
+model-trained:
+  feature: true
+  station: true
+  statition: false
+  wide: true
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.1
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.1
+  timeout: 7200
+optimized: true

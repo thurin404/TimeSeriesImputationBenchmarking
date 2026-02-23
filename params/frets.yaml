@@ -1,0 +1,23 @@
+model:
+  MIT_weight: 1.6254806167089484
+  ORT_weight: 0.5259954394211568
+  batch_size: 96
+  channel_independence: true
+  embed_size: 128
+  epochs: 500
+  hidden_size: 512
+  patience: 30
+model-trained:
+  feature: true
+  station: true
+  statition: false
+  wide: true
+optimization:
+  n_trials: 50
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

@@ -1,0 +1,331 @@
+stages:
+  preproc:
+    cmd: uv run src/preprocessing.py data/01_raw/org data/01_raw/ref 
+      data/02_preproc
+    deps:
+    - src/preprocessing.py
+    - data/01_raw/org
+    - data/01_raw/ref
+    params:
+    - preprocessing.resample
+    - preprocessing.resample_freq
+    outs:
+    - data/02_preproc
+
+  prepare:
+    cmd: uv run src/prepare.py data/02_preproc processed_org.csv 
+      processed_ref.csv data/03_prepared
+    deps:
+    - src/prepare.py
+    - data/02_preproc
+    outs:
+    - data/03_prepared
+    params:
+    - prepare.clip
+
+  prepare_working_files:
+    cmd: uv run src/prepare_working_files.py data/03_prepared prepared_ref.csv 
+      data/04_working_files data/00_tools/scalers
+    deps:
+    - src/prepare_working_files.py
+    - data/03_prepared
+    params:
+    - prepare_working_files.partition_by
+    - prepare_working_files.scaling
+    outs:
+    - data/04_working_files
+    - data/00_tools/scalers
+
+  imputation_ffill:
+    cmd: uv run src/imputation/ffill.py data/04_working_files data/05_imputed
+    deps:
+    - src/imputation/ffill.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    outs:
+    - data/05_imputed/ffill
+    - data/05_imputed/mask
+    - data/05_imputed/original
+
+  imputation_mean:
+    cmd: uv run src/imputation/mean.py data/04_working_files data/05_imputed
+    deps:
+    - src/imputation/mean.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    outs:
+    - data/05_imputed/mean
+
+  imputation_interpolate:
+    cmd: uv run src/imputation/interpolate.py data/04_working_files 
+      data/05_imputed
+    deps:
+    - src/imputation/interpolate.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    outs:
+    - data/05_imputed/interpolation
+
+  imputation_knn:
+    cmd: uv run src/imputation/knn.py data/04_working_files data/05_imputed
+    deps:
+    - src/imputation/knn.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - params/knn.yaml:
+    outs:
+    - data/05_imputed/knn
+
+  imputation_xgboost:
+    cmd: uv run src/imputation/xgboost_imputation.py data/04_working_files 
+      data/05_imputed
+    deps:
+    - src/imputation/xgboost_imputation.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.xgboost
+    - params/xgboost.yaml:
+    outs:
+    - data/05_imputed/xgboost
+
+  imputation_iterative:
+    cmd: uv run src/imputation/iterative.py data/04_working_files 
+      data/05_imputed
+    deps:
+    - src/imputation/iterative.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.iterative
+    - params/iterative.yaml:
+    outs:
+    - data/05_imputed/iterative
+
+  imputation_saits:
+    cmd: uv run src/imputation/saits.py data/04_working_files data/05_imputed 
+      models/saits
+    deps:
+    - src/imputation/saits.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.saits
+    - params/saits.yaml:
+    outs:
+    - data/05_imputed/saits
+    - models/saits:
+        cache: false
+
+  imputation_brits:
+    cmd: uv run src/imputation/brits.py data/04_working_files data/05_imputed 
+      models/brits
+    deps:
+    - src/imputation/brits.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.brits
+    - params/brits.yaml:
+    outs:
+    - data/05_imputed/brits
+    - models/brits:
+        cache: false
+
+  imputation_timesnet:
+    cmd: uv run src/imputation/timesnet.py data/04_working_files data/05_imputed
+      models/timesnet
+    deps:
+    - src/imputation/timesnet.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.timesnet
+    - params/timesnet.yaml:
+    outs:
+    - data/05_imputed/timesnet
+    - models/timesnet:
+        cache: false
+
+  imputation_imputeformer:
+    cmd: uv run src/imputation/imputeformer.py data/04_working_files 
+      data/05_imputed models/imputeformer
+    deps:
+    - src/imputation/imputeformer.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.imputeformer
+    - params/imputeformer.yaml:
+    outs:
+    - data/05_imputed/imputeformer
+    - models/imputeformer:
+        cache: false
+
+  imputation_gpvae:
+    cmd: uv run src/imputation/gpvae.py data/04_working_files data/05_imputed 
+      models/gpvae
+    deps:
+    - src/imputation/gpvae.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.gpvae
+    - params/gpvae.yaml:
+    outs:
+    - data/05_imputed/gpvae
+    - models/gpvae:
+        cache: false
+
+  imputation_tefn:
+    cmd: uv run src/imputation/tefn.py data/04_working_files data/05_imputed 
+      models/tefn
+    deps:
+    - src/imputation/tefn.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.tefn
+    - params/tefn.yaml:
+    outs:
+    - data/05_imputed/tefn
+    - models/tefn:
+        cache: false
+
+  imputation_timemixer:
+    cmd: uv run src/imputation/timemixer.py data/04_working_files 
+      data/05_imputed models/timemixer
+    deps:
+    - src/imputation/timemixer.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.timemixer
+    - params/timemixer.yaml:
+    outs:
+    - data/05_imputed/timemixer
+    - models/timemixer:
+        cache: false
+
+  # Time-LLM: Replaces GPT4TS with more stable LLM-based imputation
+  # TimeLLM currently disabled due to GPU memory constraints during optimization
+  # imputation_timellm:
+  #   cmd: uv run src/imputation/timellm.py data/04_working_files data/05_imputed 
+  #     models/timellm
+  #   deps:
+  #   - src/imputation/timellm.py
+  #   - src/imputation/base_pypots_imputer.py
+  #   - src/imputation/tools/utilities.py
+  #   - data/04_working_files
+  #   params:
+  #   - imputation.timellm
+  #   - params/timellm.yaml:
+  #   outs:
+  #   - data/05_imputed/timellm
+
+  # MOMENT: Foundation model for time series with T5 transformer backbone
+  imputation_moment:
+    cmd: uv run src/imputation/moment.py data/04_working_files data/05_imputed 
+      models/moment
+    deps:
+    - src/imputation/moment.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.moment
+    - params/moment.yaml:
+    outs:
+    - data/05_imputed/moment
+    - models/moment:
+        cache: false
+
+  # TSLANet: Lightweight attention network for time series
+  imputation_tslanet:
+    cmd: uv run src/imputation/tslanet.py data/04_working_files data/05_imputed 
+      models/tslanet
+    deps:
+    - src/imputation/tslanet.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.tslanet
+    - params/tslanet.yaml:
+    outs:
+    - data/05_imputed/tslanet
+    - models/tslanet:
+        cache: false
+
+  # FreTS: Frequency-enhanced time series imputation (alternative to FITS)
+  imputation_frets:
+    cmd: uv run src/imputation/frets.py data/04_working_files data/05_imputed 
+      models/frets
+    deps:
+    - src/imputation/frets.py
+    - src/imputation/base_pypots_imputer.py
+    - src/imputation/tools/utilities.py
+    - data/04_working_files
+    params:
+    - imputation.frets
+    - params/frets.yaml:
+    outs:
+    - data/05_imputed/frets
+    - models/frets:
+        cache: false
+
+  # imputation_missnet:
+  #   cmd: uv run src/imputation/missnet.py data/04_working_files data/05_imputed models/missnet
+  #   deps:
+  #   - src/imputation/missnet.py
+  #   - src/imputation/base_pypots_imputer.py
+  #   - src/imputation/tools/utilities.py
+  #   - data/04_working_files
+  #   params:
+  #   - imputation.missnet
+  #   - params/missnet.yaml:
+  #   outs:
+  #   - data/05_imputed/missnet
+
+
+
+
+  evaluation:
+    cmd: uv run src/evaluation.py data/05_imputed data/06_evaluation
+    deps:
+    - src/evaluation.py
+    - data/05_imputed
+    outs:
+    - data/06_evaluation
+
+  plot_comparisons:
+    cmd: uv run scripts/plot_imputation_comparison.py data/04_working_files 
+      data/05_imputed data/08_plots
+    deps:
+    - scripts/plot_imputation_comparison.py
+    - data/04_working_files
+    - data/05_imputed
+    params:
+    - prepare_working_files.partition_by
+    - preprocessing.resample
+    - preprocessing.resample_freq
+    outs:
+    - data/08_plots
+
+params:
+- dvclive-optuna/params.yaml
+- dvclive/params.yaml
+metrics:
+- dvclive-optuna/metrics.json
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step

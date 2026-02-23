@@ -1,0 +1,24 @@
+model:
+  batch_size: 16
+  d_ffn: 256
+  dropout: 0.0
+  embed: fixed
+  epochs: 500
+  freq: h
+  n_layers: 2
+  patch_size: 16
+  patch_stride: 4
+  patience: 10
+  train_gpt_mlp: false
+model-trained:
+  feature: false
+  statition: false
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: false

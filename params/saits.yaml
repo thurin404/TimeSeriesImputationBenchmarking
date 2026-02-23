@@ -1,0 +1,28 @@
+model:
+  MIT_weight: 1
+  ORT_weight: 1
+  attn_dropout: 0.2
+  batch_size: 32
+  d_ffn: 256
+  d_k: 64
+  d_model: 512
+  d_v: 96
+  diagonal_attention_mask: true
+  dropout: 0.0
+  epochs: 150
+  n_heads: 4
+  n_layers: 2
+  patience: 10
+model-trained:
+  feature: true
+  station: true
+  wide: true
+optimization:
+  n_trials: 25
+  opt_epoch_fraction: 0.2
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  test_run_epoch_fraction: 0.2
+  timeout: 7200
+optimized: true

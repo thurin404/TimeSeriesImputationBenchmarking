@@ -1,0 +1,16 @@
+model:
+  batch_size: 64
+  dropout: 0.0
+  epochs: 500
+  patience: 30
+  rnn_hidden_size: 128
+model-trained:
+  feature: false
+  statition: false
+optimization:
+  n_trials: 50
+  optimization_enabled: true
+  pruner: hyperband
+  sampler: tpe
+  timeout: 7200
+optimized: false
