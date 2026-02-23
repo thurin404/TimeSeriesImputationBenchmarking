@@ -128,14 +128,6 @@ TEST_RUN=1 dvc repro
 dvc repro
 ```
 
-## Documentation
-
-- 📖 **[Usage Guide](docs/USAGE_GUIDE.md)** - Complete user manual with environment variables and model selection
-- 🧪 **[Experimental Design](docs/EXPERIMENTAL_DESIGN.md)** - Deep dive into preprocessing variables and their impact on imputation
-- 📊 **[Evaluation Updates](docs/EVALUATION_UPDATES.md)** - How evaluation handles scaling, metadata capture, and metric comparability
-- 📚 **[Models Documentation](docs/MODELS.md)** - Detailed model parameters and optimization strategies  
-- 🛠️ **[Troubleshooting Guide](docs/TROUBLESHOOTING.md)** - Common issues and debugging workflows
-- ✅ **[Data Validation](docs/DATA_VALIDATION.md)** - Comprehensive data quality framework
 
 ## Key Environment Variables
 
