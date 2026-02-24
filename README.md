@@ -4,6 +4,8 @@
 
 This project benchmarks multiple time series imputation algorithms on real-world multivariate weather data. The key innovation is using **real missing data patterns** from operational weather stations while preserving **ground truth** for accurate evaluation.
 
+The benchmarking approach is inspired by TSI-Bench [[1]](#ref-1), with a focus on realistic missing data patterns rather than synthetic missingness assumptions [[2]](#ref-2)[[3]](#ref-3).
+
 ### Benchmarking Methodology
 
 1. **Real Missing Patterns** (`/data/01_raw/org`): Weather station data with authentic missing value patterns from sensor failures, maintenance, etc.
@@ -31,8 +33,8 @@ The benchmark tests three preprocessing configurations to understand their impac
 ## Features
 
 ### 🤖 16 Imputation Methods Implemented
-- **Classical Methods** (6): Mean, Forward Fill, Interpolation, KNN, Iterative, XGBoost
-- **Deep Learning** (10): SAITS, BRITS, ImputeFormer, TimesNet, TimeMixer, MOMENT, TSLANet, FreTS, GPVAE, TEFN
+- **Classical Methods** (6): Mean, Forward Fill, Interpolation, KNN [[4]](#ref-4), Iterative [[5]](#ref-5), XGBoost [[6]](#ref-6)
+- **Deep Learning** (10): SAITS [[7]](#ref-7), BRITS [[8]](#ref-8), ImputeFormer [[9]](#ref-9), TimesNet [[10]](#ref-10), TimeMixer [[11]](#ref-11), MOMENT [[12]](#ref-12), TSLANet [[13]](#ref-13), FreTS [[14]](#ref-14), GPVAE [[15]](#ref-15), TEFN
 
 **Note**: Time-LLM and MissNet are not currently functional due to resource constraints and implementation issues.
 
@@ -177,13 +179,13 @@ prepare_working_files:
 
 ### Classical Methods (6 models)
 - **Simple**: Mean, Forward Fill, Linear Interpolation
-- **Advanced**: KNN, Iterative Imputation, XGBoost
+- **Advanced**: KNN [[4]](#ref-4), Iterative Imputation [[5]](#ref-5), XGBoost [[6]](#ref-6)
 
 ### Deep Learning Methods (10 models)
-- **Transformer-based**: SAITS, ImputeFormer, MOMENT
-- **RNN-based**: BRITS, TimesNet, TimeMixer
-- **Lightweight**: TSLANet, FreTS
-- **Generative**: GPVAE, TEFN
+- **Transformer-based**: SAITS [[7]](#ref-7) (self-attention), ImputeFormer [[9]](#ref-9) (transformer architecture [[16]](#ref-16)), MOMENT [[12]](#ref-12) (pre-trained model)
+- **RNN-based**: BRITS [[8]](#ref-8) (bidirectional RNN [[17]](#ref-17)), TimesNet [[10]](#ref-10), TimeMixer [[11]](#ref-11)
+- **Lightweight**: TSLANet [[13]](#ref-13), FreTS [[14]](#ref-14) (frequency domain)
+- **Generative**: GPVAE [[15]](#ref-15) (variational autoencoder [[18]](#ref-18)), TEFN
 
 ## Contributing
 
@@ -191,3 +193,41 @@ prepare_working_files:
 2. **Testing**: Use `TEST_RUN=1` for quick validation of changes
 3. **Documentation**: Update relevant docs when adding features
 4. **Memory**: Test with `LOW_MEMORY_MODE=1` for GPU compatibility
+
+## References
+
+<a id="ref-1"></a>[1] Du, W., Wang, J., Qian, L., Yang, Y., Ibrahim, Z., Liu, F., Wang, Z., Liu, H., Zhao, Z., Zhou, Y., Wang, W., Ding, K., Liang, Y., Prakash, B. A., & Wen, Q. (2024). TSI-Bench: Benchmarking Time Series Imputation. arXiv:2406.12747.
+
+<a id="ref-2"></a>[2] Rubin, D. B. (1976). Inference and missing data. *Biometrika*, 63(3), 581–592.
+
+<a id="ref-3"></a>[3] Little, R., & Rubin, D. (2019). *Statistical Analysis with Missing Data* (3rd ed.). Wiley Series in Probability and Statistics.
+
+<a id="ref-4"></a>[4] Troyanskaya, O., et al. (2001). Missing value estimation methods for DNA microarrays. *Bioinformatics*, 17(6), 520–525.
+
+<a id="ref-5"></a>[5] van Buuren, S., & Groothuis-Oudshoorn, K. (2011). mice: Multivariate Imputation by Chained Equations in R. *Journal of Statistical Software*, 45(3), 1–67.
+
+<a id="ref-6"></a>[6] Chen, T., & Guestrin, C. (2016). XGBoost: A Scalable Tree Boosting System. In *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining* (pp. 785–794).
+
+<a id="ref-7"></a>[7] Du, W., Côté, D., & Liu, Y. (2023). SAITS: Self-attention-based imputation for time series. *Expert Systems with Applications*, 219, 119619.
+
+<a id="ref-8"></a>[8] Cao, W., Wang, D., Li, J., Zhou, H., Li, L., & Li, Y. (2018). BRITS: Bidirectional Recurrent Imputation for Time Series. In *Advances in Neural Information Processing Systems* (Vol. 31).
+
+<a id="ref-9"></a>[9] Nie, Y., Nguyen, N. H., Sinthong, P., & Kalagnanam, J. (2024). A Time Series is Worth 64 Words: Long-term Forecasting with Transformers. In *International Conference on Learning Representations*.
+
+<a id="ref-10"></a>[10] Wu, H., Hu, T., Liu, Y., Zhou, H., Wang, J., & Long, M. (2022). TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis. In *International Conference on Learning Representations*.
+
+<a id="ref-11"></a>[11] Wang, S., Wu, H., Shi, X., Hu, T., Luo, H., Ma, L., Zhang, J. Y., & Zhou, J. (2025). TimeMixer: Decomposable Multiscale Mixing for Time Series Forecasting. In *International Conference on Learning Representations*.
+
+<a id="ref-12"></a>[12] Goswami, M., Szafer, K., Choudhry, A., Cai, Y., Li, S., & Dubrawski, A. (2024). MOMENT: A Family of Open Time-series Foundation Models. In *International Conference on Machine Learning*.
+
+<a id="ref-13"></a>[13] Eldele, E., Ragab, M., Chen, Z., Wu, M., Kwoh, C. K., Li, X., & Guan, C. (2024). TSLANet: Rethinking Transformers for Time Series Representation Learning. In *International Conference on Machine Learning*.
+
+<a id="ref-14"></a>[14] Yi, K., Zhang, Q., Fan, W., Wang, S., Wang, P., He, H., An, N., Lian, D., Cao, L., & Niu, Z. (2023). Frequency-domain MLPs are More Effective Learners in Time Series Forecasting. In *Advances in Neural Information Processing Systems* (Vol. 36).
+
+<a id="ref-15"></a>[15] Fortuin, V., Baranchuk, D., Rätsch, G., & Mandt, S. (2020). GP-VAE: Deep Probabilistic Time Series Imputation. In *International Conference on Artificial Intelligence and Statistics* (pp. 1651–1661).
+
+<a id="ref-16"></a>[16] Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). Attention Is All You Need. In *Advances in Neural Information Processing Systems* (Vol. 30).
+
+<a id="ref-17"></a>[17] Hochreiter, S., & Schmidhuber, J. (1997). Long Short-Term Memory. *Neural Computation*, 9(8), 1735–1780.
+
+<a id="ref-18"></a>[18] Kingma, D. P., & Welling, M. (2014). Auto-Encoding Variational Bayes. In *International Conference on Learning Representations*.
